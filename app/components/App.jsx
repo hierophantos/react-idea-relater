@@ -4,54 +4,45 @@ import AddRelatedForm from './AddRelatedForm.jsx'
 import uuid from 'node-uuid'
 
 export default class App extends React.Component {
-
   constructor(props) {
     super(props)
     this.state={
 
-             notes : [
-              {
-                id: uuid.v4(),
-                task: 'Learn Webpack'
-              },
-              {
-                id: uuid.v4(),
-                task: 'Learn React'
-              },
-              {
-                id: uuid.v4(),
-                task: 'Do laundry'
-              }
-            ],
-            relations : [
+      notes : [
+        {
+          id: uuid.v4(),
+          task: 'Learn Webpack'
+        },
+        {
+          id: uuid.v4(),
+          task: 'Learn React'
+        },
+        {
+          id: uuid.v4(),
+          task: 'Do laundry'
+        }
+      ],
+      relations : [],
 
-            ]
+      counter : 0
+
     }
-
-    // relation:
-    // {
-    //   id: uuid.v4(),
-    //   sourceId: uuid.v4(),
-    //   targetId: uuid.v4(),
-    //   label: 'Learn Webpack'
-    // }
-
   }
 
 
   editNote = (id, value) => {
-      const notes = this.state.notes.map( (note) => {
-              if (note.id === id)
-                  note.task = value
-              return note
-          })
+    const notes = this.state.notes.map( (note) => {
+      if (note.id === id)
+        note.task = value
+      return note
+    })
 
 
-      this.setState({notes})
+    this.setState({notes})
 
-      //this.setState({
-      //        notes: newNotes
-      //    })
+    //this.setState({
+    //        notes: newNotes
+    //    })
   }
 
   addRelation = (sourceId, targetId) => {
@@ -68,12 +59,12 @@ export default class App extends React.Component {
           targetId: targetId,
           label: ''
         },
-        {
-          id: uuid.v4(),
-          sourceId: targetId,
-          targetId: sourceId,
-          label: ''
-        }]
+         {
+           id: uuid.v4(),
+           sourceId: targetId,
+           targetId: sourceId,
+           label: ''
+         }]
       )
     })
 
@@ -94,26 +85,33 @@ export default class App extends React.Component {
     return id;
   }
 
+  increment = () => {
+    this.setState ({
+      counter: this.state.counter + 1
+    })
+  }
+
 
   render() {
     const {notes, relations} = this.state;
 
     return (
       <div>
-        <br />
-        {/*<AddRelatedForm
-          note={null}
-          relatedNotes={[]}
-          relateToCurrentIdea={ (targetId) => this.props.addRelation(id, targetId) }
-          allNotes={notes} />*/}
-
+        <h1>The text is here</h1>
+        <br/>
+        <button
+            onClick={this.increment}
+        >^
+        </button>
+        {this.state.counter}
+        <br/><br/>
         <button onClick={() => this.addNote()}>+</button>
         <Notes
-          addRelation={this.addRelation}
-          addNote={this.addNote}
-          onEdit={this.editNote}
-          notes={notes}
-          relations={relations}
+            addRelation={this.addRelation}
+            addNote={this.addNote}
+            onEdit={this.editNote}
+            notes={notes}
+            relations={relations}
         />
         <pre>{JSON.stringify(this.state.relations, null, '\t')}</pre>
       </div>
