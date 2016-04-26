@@ -1,15 +1,11 @@
 import React from 'react'
-import Notes from './Notes.jsx'
-import AddRelatedForm from './AddRelatedForm.jsx'
-import uuid from 'node-uuid'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state={
-
-      counter : 0
-
+      counter : 0,
+      tttBoxState : ""
     }
   }
 
@@ -20,6 +16,11 @@ export default class App extends React.Component {
     })
   }
 
+  tttDrawX = () => {
+    this.setState ({
+      tttBoxState : "x"
+    })
+  }
 
   render() {
     const {notes, relations} = this.state;
@@ -28,6 +29,12 @@ export default class App extends React.Component {
       <div>
         <h1>The text is here</h1>
         <br/>
+        <div
+            onClick={this.tttDrawX}
+            style={ {width: "30px", height: "30px", border: "1px solid black"} } >
+          {this.state.tttBoxState}
+        </div>
+
         <button
             onClick={this.increment}
         >+
