@@ -1,4 +1,5 @@
 import React from 'react'
+import TttCell from './TttCell.jsx'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,24 +17,14 @@ export default class App extends React.Component {
     })
   }
 
-  tttDrawX = () => {
-    this.setState ({
-      tttBoxState : "x"
-    })
-  }
-
   render() {
-    const {notes, relations} = this.state;
-
-    return (
+     return (
       <div>
-        <h1>The text is here</h1>
+        <h1>The text has changed</h1>
         <br/>
-        <div
-            onClick={this.tttDrawX}
-            style={ {width: "30px", height: "30px", border: "1px solid black"} } >
-          {this.state.tttBoxState}
-        </div>
+        <TttCell /><TttCell /><TttCell /><br/>
+        <TttCell /><TttCell /><TttCell /><br/>
+        <TttCell /><TttCell /><TttCell /><br/>
 
         <button
             onClick={this.increment}
